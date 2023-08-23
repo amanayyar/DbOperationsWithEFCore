@@ -13,7 +13,6 @@ namespace DbOperationsWithEFCore
 			builder.Services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"))
 				);
-			//
 
 			// Add services to the container.
 
