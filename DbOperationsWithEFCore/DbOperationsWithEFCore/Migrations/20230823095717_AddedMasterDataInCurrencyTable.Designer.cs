@@ -4,6 +4,7 @@ using DbOperationsWithEFCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbOperationsWithEFCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230823095717_AddedMasterDataInCurrencyTable")]
+    partial class AddedMasterDataInCurrencyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,32 +152,6 @@ namespace DbOperationsWithEFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Hindi",
-                            Title = "Hindi"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Tamil",
-                            Title = "Tamil"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Punjabi",
-                            Title = "Punjabi"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Urdu",
-                            Title = "Urdu"
-                        });
                 });
 
             modelBuilder.Entity("DbOperationsWithEFCore.Data.Book", b =>
