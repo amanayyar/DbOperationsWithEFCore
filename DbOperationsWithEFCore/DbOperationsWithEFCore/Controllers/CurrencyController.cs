@@ -34,5 +34,12 @@ namespace DbOperationsWithEFCore.Controllers
 			return Ok(result);
 		}
 
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetCurrencyByIdAsync([FromRoute] int id)
+		{
+			var result = await _appDbContext.Currencies.FindAsync(id);
+			return Ok(result);
+		}
+
 	}
 }
