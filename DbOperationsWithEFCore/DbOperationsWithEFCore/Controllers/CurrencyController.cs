@@ -22,7 +22,7 @@ namespace DbOperationsWithEFCore.Controllers
 		{
 			//var result = _appDbContext.Currencies.ToList();
 			var result = (from currencies in _appDbContext.Currencies
-						 select currencies).ToList();
+						  select currencies).ToList();
 			return Ok(result);
 		}
 		[HttpGet("GetAllCurrenciesAsync")]
@@ -30,14 +30,25 @@ namespace DbOperationsWithEFCore.Controllers
 		{
 			//var result = await _appDbContext.Currencies.ToListAsync();
 			var result = await (from currencies in _appDbContext.Currencies
-						  select currencies).ToListAsync();
+								select currencies).ToListAsync();
 			return Ok(result);
 		}
 
-		[HttpGet("{id}")]
+		[HttpGet("{id:int}")]
 		public async Task<IActionResult> GetCurrencyByIdAsync([FromRoute] int id)
 		{
 			var result = await _appDbContext.Currencies.FindAsync(id);
+			return Ok(result);
+		}
+
+		//[HttpGet("{name}/{description}")]
+		[HttpGet("{name}")]
+		public async Task<IActionResult> GetCurrencyByNameAsync([FromRoute] string name, [FromQuery] string? description)
+		{
+			var result = await _appDbContext.Currencies
+				.FirstOrDefaultAsync(x =>
+				x.Title == name
+				&& (string.IsNullOrEmpty(description) || x.Description == description));
 			return Ok(result);
 		}
 
