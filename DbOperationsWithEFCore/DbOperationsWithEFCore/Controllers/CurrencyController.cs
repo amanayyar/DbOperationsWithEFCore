@@ -45,10 +45,15 @@ namespace DbOperationsWithEFCore.Controllers
 		[HttpGet("{name}")]
 		public async Task<IActionResult> GetCurrencyByNameAsync([FromRoute] string name, [FromQuery] string? description)
 		{
+			//var result = await _appDbContext.Currencies
+			//	.FirstOrDefaultAsync(x =>
+			//	x.Title == name
+			//	&& (string.IsNullOrEmpty(description) || x.Description == description));
+
 			var result = await _appDbContext.Currencies
-				.FirstOrDefaultAsync(x =>
+				.Where(x =>
 				x.Title == name
-				&& (string.IsNullOrEmpty(description) || x.Description == description));
+				&& (string.IsNullOrEmpty(description) || x.Description == description)).ToListAsync();
 			return Ok(result);
 		}
 
